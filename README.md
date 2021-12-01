@@ -8,3 +8,4 @@ By default it test your gnl with BUFFER_SIZE from 1 to 100.
 	> Set your gnl path in ./grademe.sh
 
 - execute `./grademe`
+	> ARG1: you can add the number of test you want the tester to make for each of BUFFER_SIZE
