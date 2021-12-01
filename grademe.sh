@@ -7,13 +7,21 @@ GREEN='\e[32m'
 NC='\e[39m' # No Colo
 ERROR=0
 echo -n "" > DEEPTHOUGHT
-for i in `seq 1 100`
+
+if [ $# -eq 0 ]
+  then
+	MAX=20
+    echo "20 tests per BUFFER_SIZE"
+else
+	MAX=$1
+fi
+for (( i=1; i<=1000000; i = i < 3 ? i + 1 : i * i / 2))
 do
 	echo "BUFFER_SIZE : [$i]"
 	gcc -Wall -Wextra -Werror main.c ${GNL}get_next_line.c ${GNL}get_next_line_utils.c -I${GNL} -D BUFFER_SIZE=$i
-	for j in `seq 1 5`
+	for (( j=1; j <= $MAX; j++))
 	do
-		NUMBER=$[( $RANDOM % 4999 )]
+		NUMBER=$[( $RANDOM % 50000 * 10 )]
 		touch sample
 		# echo "$NUMBER caractere(s)"
 		head -c $NUMBER /dev/urandom | tr -dc '[:print:] \n' > sample
