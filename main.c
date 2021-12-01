@@ -15,7 +15,7 @@ void	ft_free(char **s)
 	*s = 0;
 }
 
-int	main(int argc, char **argv)
+int	main()
 {
 	char strue[SIZE];
 	char *smine;
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 		}
 		ft_free(&smine);
 	}
-	while (!strue && (smine = get_next_line(fd)) != NULL)
+	while ((smine = get_next_line(fd)) != NULL)
 	{
 		count++;
 		error++;

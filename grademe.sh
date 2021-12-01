@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GNL='../'
+GNL='../get_next_line/'
 
 RED='\e[31m'
 GREEN='\e[32m'
@@ -10,7 +10,7 @@ echo -n "" > DEEPTHOUGHT
 for i in `seq 1 100`
 do
 	echo "BUFFER_SIZE : [$i]"
-	gcc main.c ${GNL}get_next_line.c ${GNL}get_next_line_utils.c -D BUFFER_SIZE=$i
+	gcc -Wall -Wextra -Werror main.c ${GNL}get_next_line.c ${GNL}get_next_line_utils.c -I${GNL} -D BUFFER_SIZE=$i
 	for j in `seq 1 5`
 	do
 		NUMBER=$[( $RANDOM % 4999 )]
