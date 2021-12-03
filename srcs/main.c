@@ -5,6 +5,7 @@ char *get_next_line(int fd);
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 # define SIZE 5000
 
@@ -49,5 +50,7 @@ int	main()
 	{
 		printf("OK\n");
 	}
+	close(fd);
+	fclose(fp);
 	return (0);
 }
