@@ -18,53 +18,61 @@ void	ft_free(char **s)
 
 int	main()
 {
-	char strue1[SIZE];
-	char strue2[SIZE];
-	char *smine1;
-	char *smine2;
-	int	fd1;
-	int	fd2;
-	FILE	*fp1;
-	FILE	*fp2;
-	int	count;
-	int error;
+	char	buff[3][SIZE];
+	char	*strue[3];
+	char	*smine[3];
+	int		fd[3];
+	FILE	*fp[3];
+	int		count;
+	int		error;
 
-	fd1 = open("./sample_bonus1", O_RDONLY);
-	fd2 = open("./sample_bonus2", O_RDONLY);
 
-	fp1 = fopen("./sample_bonus1", "r");
-	fp2 = fopen("./sample_bonus2", "r");
+
+	fd[0] = open("./sample_bonus0", O_RDONLY);
+	fd[1] = open("./sample_bonus1", O_RDONLY);
+	fd[2] = open("./sample_bonus2", O_RDONLY);
+
+	fp[0] = fopen("./sample_bonus0", "r");
+	fp[1] = fopen("./sample_bonus1", "r");
+	fp[2] = fopen("./sample_bonus2", "r");
 	
 	count = 0;
 	error = 0;
-	while(fgets(strue1, SIZE, fp1) != NULL)
+	while((strue[0] = fgets(buff[0], SIZE, fp[0])) != NULL)
 	{
 		count++;
-		fgets(strue2, SIZE, fp2);
-		smine1 = get_next_line(fd1);
-		smine2 = get_next_line(fd2);
-		if ((strue1 == NULL) != (smine1 == NULL) || strcmp(strue1, smine1))
+		strue[1] = fgets(buff[1], SIZE, fp[1]);
+		strue[2] = fgets(buff[2], SIZE, fp[2]);
+		smine[0] = get_next_line(fd[0]);
+		smine[1] = get_next_line(fd[1]);
+		smine[2] = get_next_line(fd[2]);
+		for (int j = 0; j < 3; j++)
 		{
-			error++;
-			printf("(0)Tour %d KO (sample1):\nfgets: %s\nget_next_line: %s\n", count,  strue1, smine1);
+			if (strue[j] && smine[j] && strcmp(strue[j], smine[j]))
+			{
+				error++;
+				printf("Tour %d KO (sample%d):\nfgets: %s\nget_next_line: %s\n", count, j, strue[j], smine[j]);
+			}
+			else if ((strue[j] == 0) != (smine[j] == 0))
+			{
+				error++;
+				printf("Tour %d KO (sample%d):\nfgets: %s\nget_next_line: %s\n", count, j, strue[j], smine[j]);
+			}
+			ft_free(&smine[j]);
 		}
-		if ((strue2 == NULL) != (smine2 == NULL) || strcmp(strue2, smine2))
-		{
-			error++;
-			printf("(1)Tour %d KO (sample2):\nfgets: %s\nget_next_line: %s\n", count,  strue2, smine2);
-		}
-		ft_free(&smine1);
-		ft_free(&smine2);
 	}
-	ft_free(&smine1);
-	ft_free(&smine2);
+	ft_free(&smine[0]);
+	ft_free(&smine[1]);
+	ft_free(&smine[2]);
 	if (!error)
 	{
 		printf("OK\n");
 	}
-	close(fd1);
-	close(fd2);
-	fclose(fp1);
-	fclose(fp2);
+	close(fd[0]);
+	close(fd[1]);
+	close(fd[2]);
+	fclose(fp[0]);
+	fclose(fp[1]);
+	fclose(fp[2]);
 	return (0);
 }
