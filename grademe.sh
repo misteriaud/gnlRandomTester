@@ -10,6 +10,9 @@ ERROR=0
 if [ -d "temp" ];then
 	rm -r temp
 fi
+if [ -f "DEEPTHOUGHT" ];then
+	rm DEEPTHOUGHT
+fi
 mkdir temp
 
 cd temp
