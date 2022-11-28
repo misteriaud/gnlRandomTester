@@ -9,3 +9,5 @@ By default it test your gnl with BUFFER_SIZE from 1 to 100.
 
 - execute `./grademe ARG1`
 	> ARG1(optional): the number of test you want the tester to make for each of BUFFER_SIZE
+
+**Ce projet a ete modifie par Ouafabulous**
